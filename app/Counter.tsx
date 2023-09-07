@@ -22,5 +22,5 @@ const [add,setAdd] = useState(0)
     </div>
   )
 }
-export const useClient = true;
+
 export default Counter

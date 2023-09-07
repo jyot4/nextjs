@@ -1,5 +1,6 @@
 
-import Counter from "./Counter"
+// import Counter from "./Counter"
+import Todo from './Todo list/Todo'
 
 export default function Home() {
 
@@ -8,7 +9,7 @@ export default function Home() {
     <>
     <div>hello
 
-     <Counter/>
+     <Todo/>
 
     </div>
    
