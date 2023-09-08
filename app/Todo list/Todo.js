@@ -6,50 +6,67 @@ import EditIcon from '@mui/icons-material/Edit';
 
 
 function Todo() {
-    const [input , setInput] = useState("")
-const [Add , setAdd] = useState([])
+  const [input, setInput] = useState("")
+  const [Add, setAdd] = useState([])
 
-const [value , setValue]= useState()
+  const [editIndex, setEditIndex] = useState(-1)
 
-function handleAdd(){
-setAdd([...Add, input])
-setInput (" ")
-}
+  function handleAdd() {
+    if (editIndex !== -1) {
 
-function handleRemove(index){
+      // const editlist = Add.filter((i)=> i === index)
 
- const updated = Add.filter((_, i) => i !==index)
- setAdd(updated)
+      const editlist = [...Add];
 
-}
+      editlist[editIndex] = input
+      setAdd(editlist);
+      setEditIndex(-1)
 
-function handleUpdate(index){
-const modify  = Add.filter((i)=> i == index)
+    }
 
-setInput(Add[index])
-setValue(modify)
-}
+    else {
+      if (input.length !== 0) {
+        setAdd([...Add, input])
+      }
+    }
+
+    setInput(" ")
+  }
+
+  function handleRemove(index) {
+
+    const updated = Add.filter((_, i) => i !== index)
+    setAdd(updated)
+
+  }
+
+  function handleUpdate(index) {
+
+
+    setInput(Add[index])
+    setEditIndex(index)
+  }
 
 
   return (
     <div>
-      <input type='text' placeholder='' value={input} onChange={(e)=>setInput(e.target.value)}></input>
+      <input type='text' placeholder='' value={input} onChange={(e) => setInput(e.target.value)}></input>
       <button onClick={handleAdd}>Add
       </button>
 
       <ul>
         {
-            Add.map((data,index)=>{
-                return(
-                <li key={index}>
-                {data}<button onClick={()=> handleRemove(index)}><DeleteIcon/></button>
-                <button onClick={()=> handleUpdate(index)}><EditIcon/></button>
+          Add.map((data, index) => {
+            return (
+              <li key={index}>
+                {data}<button onClick={() => handleRemove(index)}><DeleteIcon /></button>
+                <button onClick={() => handleUpdate(index)}><EditIcon /></button>
               </li>
-                )
-            })
-}
+            )
+          })
+        }
       </ul>
-     
+
     </div>
   )
 }
